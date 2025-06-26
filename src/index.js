@@ -1,22 +1,41 @@
 import express from "express";
-import { join, __dirname } from "./utils/index.js";
+import cors from "cors";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import userRoutes from "./routes/user.route.js";
-//settings
+import inmueblesRoutes from "./routes/inmueble.route.js";
+
+// path setup
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 app.set("PORT", 3000);
 
 // middlewares
+app.use(cors());
 app.use(express.json());
-app.use(express.static(join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "frontend"))); // para los HTML
 
-//routes
+// rutas
+// Home
 app.get("/", (req, res) => {
-  res.json({ title: "Home Page" });
+  console.log(__dirname);
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
-// app.use("/api/users", userRoutes);
 
-//listeners
+// Formulario
+app.get("/nuevoUsuario", (req, res) => {
+  console.log(__dirname);
+  res.sendFile(path.join(__dirname, 'frontend', 'nuevoUsuario.html'));
+});
+
+app.use("/users", userRoutes);
+app.use("/inmuebles", inmueblesRoutes);
+
 app.listen(app.get("PORT"), () => {
-  console.log(`Server on port http://localhost:${app.get("PORT")}`);
+  console.log(`Server on http://localhost:${app.get("PORT")}`);
 });

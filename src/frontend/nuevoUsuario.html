@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crear Usuario</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <h1>Formulario: Crear Usuario</h1>
+  <form id="userForm">
+    <label>Nombre:
+      <input type="text" name="name" required />
+    </label>
+    <br />
+    <label>Email:
+      <input type="email" name="mail" required />
+    </label>
+    <br />
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    const form = document.getElementById('userForm');
+    const resultado = document.getElementById('resultado');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value,
+        mail: form.mail.value
+      };
+
+      const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const json = await response.json();
+      resultado.innerText = JSON.stringify(json, null, 2);
+    });
+  </script>
+</body>
+</html>
