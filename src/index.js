@@ -27,10 +27,15 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
-// Formulario
+// Formulario Agregar Usuario 
 app.get("/nuevoUsuario", (req, res) => {
   console.log(__dirname);
   res.sendFile(path.join(__dirname, 'frontend', 'nuevoUsuario.html'));
+});
+// Listado Usuarios 
+app.get("/listaUsuarios", (req, res) => {
+  console.log(__dirname);
+  res.sendFile(path.join(__dirname, 'frontend', 'listaUsuarios.html'));
 });
 
 app.use("/users", userRoutes);

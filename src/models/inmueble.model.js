@@ -1,23 +1,29 @@
 // model
-// import ... from '../config/db-connection.js'
+import db from '../config/db.js'
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
-const inmuebles = [
-  {
-    id: 1,
-    direccion: "Av. Siempre Viva 123",
-    tipo: "Departamento",
-    precio: 120000,
-    estado: "Disponible",
-    ambientes: 3
-  },
-  {
-    id: 2,
-    direccion: "Calle Falsa 456",
-    tipo: "Casa",
-    precio: 250000,
-    estado: "Reservado",
-    ambientes: 5
+console.log("db es instancia de Firestore?", typeof db); // debería mostrar 'object'
+console.log("db:", db);
+
+const inmueblesCollection = collection(db, 'Inmuebles')
+
+// Método para obtener todos los productos
+export const getAllInmuebles = async () => {
+
+  try {
+ 
+    const querySnapshot = await getDocs(inmueblesCollection); 
+    const inmuebles = []; 
+  
+    querySnapshot.forEach((doc) => { 
+      inmuebles.push({ id: doc.id, ...doc.data() });
+    });
+  
+   return inmuebles;
+  
+  } catch (error) {
+    console.error("error en el modelo:", error);
+    throw error;
   }
-];
 
-export default inmuebles;
+};

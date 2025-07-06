@@ -5,7 +5,6 @@ import db from '../config/db.js';
 import { fakerES_MX as faker } from '@faker-js/faker';
 
 const users = db.users;
-console.log("Usuarios cargados al iniciar:", db.users);
 
 const getAllUsers = () => {
   return users;

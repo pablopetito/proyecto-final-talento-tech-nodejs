@@ -1,23 +1,82 @@
+
+/* Aseguramos que el body no limite el ancho */
 body {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 50px;
-  background-color: #f4f4f4;
+  background-color: #d6d6d6;
 }
 
+/* El contenedor ocupa todo el ancho disponible */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Cada card ocupa automáticamente 1/3 del ancho del container */
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+}
+
+
 h1 {
+  text-align: center;
+  margin-top: 1rem; /* opcional: espacio superior */
   color: #333;
 }
 
-button {
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.button-red {
   padding: 10px 20px;
-  background-color: #1976d2;
+  background-color: #851003;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #1565c0;
+.button-red:hover {
+  background-color: #f52e20;
+}
+
+.button-green {
+  padding: 10px 20px;
+  background-color: #026c14;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-green:hover {
+  background-color: #27fa4a;
+}
+
+.button-yellow {
+  padding: 10px 20px;
+  background-color: #faed04;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-yellow:hover {
+  background-color: #f6e638;
 }

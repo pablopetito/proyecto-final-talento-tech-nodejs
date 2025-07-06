@@ -1,9 +1,16 @@
 // services
 
-import inmuebles from '../models/inmueble.model.js';
+import { getAllInmuebles as getAllInmueblesModel } from '../models/inmueble.model.js';
 
-const getAllInmuebles = () => {
-  return inmuebles;
+const getAllInmuebles = async () => {
+  try {
+  
+    return await getAllInmueblesModel();
+  
+  } catch (error) {
+      console.error("Error en el servicio:", error);
+    throw error;
+  }
 };
 
 const getInmuebleById = (id) => {

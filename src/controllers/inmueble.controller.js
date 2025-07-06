@@ -3,9 +3,17 @@
 import inmuebleService from '../services/inmueble.service.js';
 
 const listInmueble = async (req, res) => {
-  const inmuebles = inmuebleService.getAllInmuebles();
-  res.status(200).json(inmuebles);
+  try {
+    
+    const inmuebles = await inmuebleService.getAllInmuebles();
+    res.status(200).json({ payload: inmuebles });
+  
+  } catch (error) {
+    console.error("Error en el controlador:", error);
+    res.status(500).json({ mensaje: "Error interno del servidor" });
+  }
 };
+
 
 const getInmueble = (req, res) => {
   const id = parseInt(req.params.id);
