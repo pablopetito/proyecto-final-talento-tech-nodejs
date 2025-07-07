@@ -27,3 +27,14 @@ export const getAllInmuebles = async () => {
   }
 
 };
+
+// Método para agregar un nuevo inmueble
+export const addInmueble = async (nuevoInmueble) => {
+  try {
+    const docRef = await addDoc(inmueblesCollection, nuevoInmueble);
+    return { id: docRef.id, ...nuevoInmueble };
+  } catch (error) {
+    console.error("Error al agregar inmueble en el modelo:", error);
+    throw error;
+  }
+};
