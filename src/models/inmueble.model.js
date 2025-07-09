@@ -2,39 +2,61 @@
 import db from '../config/db.js'
 import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
-console.log("db es instancia de Firestore?", typeof db); // debería mostrar 'object'
-console.log("db:", db);
-
 const inmueblesCollection = collection(db, 'Inmuebles')
 
-// Método para obtener todos los productos
-export const getAllInmuebles = async () => {
+// Método obtener inmueble por id
+export const getInmuebleById = async (id) => {
+  const docRef = doc(inmueblesCollection, id);
+  const docSnap = await getDoc(docRef);
 
-  try {
- 
-    const querySnapshot = await getDocs(inmueblesCollection); 
-    const inmuebles = []; 
-  
-    querySnapshot.forEach((doc) => { 
-      inmuebles.push({ id: doc.id, ...doc.data() });
-    });
-  
-   return inmuebles;
-  
-  } catch (error) {
-    console.error("error en el modelo:", error);
-    throw error;
+  if (docSnap.exists()) {
+    return { id: docSnap.id, ...docSnap.data() };
+  } else {
+    return null;
   }
-
 };
 
-// Método para agregar un nuevo inmueble
+// Método obtener todos los inmuebles
+export const getAllInmuebles = async () => {
+  const snapshot = await getDocs(inmueblesCollection);
+  const inmuebles = snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+  return inmuebles;
+};
+
+// Método agregar nuevo inmueble
 export const addInmueble = async (nuevoInmueble) => {
   try {
     const docRef = await addDoc(inmueblesCollection, nuevoInmueble);
     return { id: docRef.id, ...nuevoInmueble };
   } catch (error) {
     console.error("Error al agregar inmueble en el modelo:", error);
+    throw error;
+  }
+};
+
+// Método actualizar inmueble
+export const updateInmueble = async (id, datosActualizados) => {
+  try {
+    const docRef = doc(db, 'Inmuebles', id);
+    await updateDoc(docRef, datosActualizados);
+    return { id, ...datosActualizados };
+  } catch (error) {
+    console.error("Error al actualizar el inmueble:", error);
+    throw error;
+  }
+};
+
+// Método eliminar inmueble
+export const deleteInmueble = async (id) => {
+  try {
+    const docRef = doc(db, 'Inmuebles', id);
+    await deleteDoc(docRef);
+    return { mensaje: "Inmueble eliminado correctamente", id };
+  } catch (error) {
+    console.error("Error al eliminar inmueble:", error);
     throw error;
   }
 };
