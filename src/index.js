@@ -2,9 +2,13 @@ import express from "express";
 import cors from "cors";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import 'dotenv/config';
 
-import userRoutes from "./routes/user.route.js";
+import userRoutes from "./routes/usuario.route.js";
 import inmueblesRoutes from "./routes/inmueble.route.js";
+
+import authRouter from './routes/usuario.route.js';
+import bodyParser from 'body-parser';
 
 // path setup
 const __filename = fileURLToPath(import.meta.url);
@@ -19,8 +23,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "frontend"))); // para los HTML
+app.use(bodyParser.json());
 
-// rutas
+// RUTAS - ROUTERS
+
+// Autemticacion 
+app.use('/auth', authRouter);
+
 // Home
 app.get("/", (req, res) => {
   console.log(__dirname);
@@ -38,7 +47,7 @@ app.get("/listaUsuarios", (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'listaUsuarios.html'));
 });
 
-app.use("/users", userRoutes);
+app.use("/usuarios", userRoutes);
 app.use("/inmuebles", inmueblesRoutes);
 
 app.listen(app.get("PORT"), () => {

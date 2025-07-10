@@ -1,5 +1,5 @@
 // model
-import db from '../config/db.js'
+import { db } from '../config/db.js'
 import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const inmueblesCollection = collection(db, 'Inmuebles')

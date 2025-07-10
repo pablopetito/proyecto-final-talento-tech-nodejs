@@ -1,6 +1,6 @@
-import dotenv from 'dotenv'; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -35,4 +35,4 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app); 
 
-export default db;
+export  { db };
