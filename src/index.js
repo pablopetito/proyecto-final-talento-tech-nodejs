@@ -4,8 +4,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 
-import userRoutes from "./routes/usuario.route.js";
 import inmueblesRoutes from "./routes/inmueble.route.js";
+import usuarioRoutes from './routes/usuario.route.js';
 
 import authRouter from './routes/usuario.route.js';
 import bodyParser from 'body-parser';
@@ -36,19 +36,13 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
-// Formulario Agregar Usuario 
-app.get("/nuevoUsuario", (req, res) => {
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname, 'frontend', 'nuevoUsuario.html'));
-});
-// Listado Usuarios 
-app.get("/listaUsuarios", (req, res) => {
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname, 'frontend', 'listaUsuarios.html'));
-});
-
-app.use("/usuarios", userRoutes);
+app.use('/usuarios', usuarioRoutes);
 app.use("/inmuebles", inmueblesRoutes);
+
+// Ruta no encontrada
+app.use((req, res, next) => {
+  res.status(404).json({ mensaje: 'Ruta no encontrada' });
+});
 
 app.listen(app.get("PORT"), () => {
   console.log(`Server on http://localhost:${app.get("PORT")}`);

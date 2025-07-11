@@ -2,6 +2,7 @@
 import { Router } from "express";
 import inmuebleController from '../controllers/inmueble.controller.js'
 import * as inmuebleService from '../services/inmueble.service.js';
+import { authentication, soloAdmins } from '../middlewares/authentication.js';
 
 
 const router = Router()
@@ -10,7 +11,7 @@ router.get('/', inmuebleController.getAllInmuebles);
 router.get('/:id', inmuebleController.getInmuebleById);
 
 // Ruta POST para agregar
-router.post('/', async (req, res) => {
+router.post('/', authentication, soloAdmins, async (req, res) => {
   try {
     const nuevoInmueble = req.body;
     const inmuebleAgregado = await inmuebleService.addInmueble(nuevoInmueble);
@@ -21,7 +22,7 @@ router.post('/', async (req, res) => {
 });
 
 // Actualizar un inmueble
-router.put('/:id', async (req, res) => {
+router.put('/:id', authentication, soloAdmins, async (req, res) => {
   try {
     const id = req.params.id;
     const datos = req.body;
@@ -33,7 +34,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Eliminar un inmueble
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authentication, soloAdmins, async (req, res) => {
   try {
     const id = req.params.id;
     const resultado = await inmuebleService.deleteInmueble(id);

@@ -16,3 +16,12 @@ export const loginUsuario = async (req, res) => {
     res.status(500).json({ mensaje: 'Error interno del servidor', error: error.message });
   }
 };
+
+export const listarUsuarios = async (req, res) => {
+  try {
+    const usuarios = await usuarioService.obtenerTodosLosUsuarios();
+    res.status(200).json(usuarios);
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error al obtener usuarios', error: error.message });
+  }
+};
