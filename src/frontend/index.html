@@ -6,68 +6,60 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Bienvenido a la App de Gestión Inmobiliaria</h1>
-  <p>Desde aquí podrás gestionar usuarios e inmuebles.</p>
+    <h1>PRESENTACION PROYECTO FINAL TALENTO TECH</h1>
+    <h3>Back-End NODE.JS</h3>
+    <h4>Alumno: PABLO SERGIO PETITO | pablopetito@gmail.com</h4>
+    <h5>REFERENCIAS PARA TESTEAR PROYECTO EN POSTMAN</h5>
 
-  <a href="/listaUsuarios">
-    <button class="button-yellow">Usuarios</button>
-  </a>
+  <div class="containerPrimer">
+        <div class="card">
+      <h3>LOGIN</h3>
+      <p>Credenciales de Prueba: { "email": "test@mail.com", "password": "1234"}</p>
+      <p>en BODY copiar el objeto con las credenciales</p>
+      <p>POST: http://localhost:3000/usuarios/login</p>
+      <p><small>agregar en Header: Key=Authorization Value: Bearer TOKEN GENERADO para continuar el test</small></p>
+    </div>
+
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+      <h3>LISTADO DE USUARIOS</h3>
+      <p>GET: http://localhost:3000/usuarios</p>
+    </div>
+
+    <div class="card">
+      <h3>LISTADO DE INMUEBLES</h3>
+      <p>GET: http://localhost:3000/inmuebles</p>
+    </div>
   
-  <a href="/nuevoUsuario">
-    <button class="button-red">Crear Nuevo Usuario</button>
-  </a>
+    <div class="card">
+      <h3>MOSTRAR UN INMUEBLE SEGUN SU ID</h3>
+      <p>GET: http://localhost:3000/inmuebles/:id</p>
+      <p>copiar un id de un inmueble del listado y pegarlo en lugar :id en la URL</p>
+    </div>
   
-  <a href="/inmuebles">
-    <button class="button-green">Inmuebles</button>
-  </a>
-  <p> REFERENCIAS PARA LA PRUEBA</p>
-  <p>EFECTUAR EL LOGIN</p>
-  <p>Credenciales de Prueba: { "email": "test@mail.com", "password": "1234"}</p>
-
-  <p>copiar el Bearer TOKEN y agregar en Header Key Authorization y en Value Bearer <TOKEN GENERADO></p>
- 
-  <p>Listado de Usuarios:  GET http://localhost:3000/usuarios</p>
-
-  <p>Listado de Inmuebles: GET http://localhost:3000/inmuebles</p>
-
-  <p>Mostrar Inmueble por ID: GET http://localhost:3000/inmuebles/ggmvTK5Jl5ruR6LnGllc</p>
-
-  <p>Agregar un Inmueble</p>
+    <div class="card">
+      <h3>AGREGAR UN NUEVO INMUEBLE</h3>
+      <p>POST: http://localhost:3000/inmuebles/:id</p>
+      <p>en BODY ingresar como objeto los datos del inmueble, ejemplo: 
+      <p><small>{"Tipo ": "Casa", "Domicilio": "Av. San Pedrito 200", "Precio": 50000, "Ambientes": 2}</small></p>
+    </div>
   
-  <p>Modificar un campo de Inmueble: </p>
+    <div class="card">
+      <h4>MODIFICAR UNO o TODOS LOS CAMPOS DE UN INMUEBLE</h4>
+      <p>PUT: http://localhost:3000/inmuebles/:id</p>
+      <p>copiar un id de un inmueble del listado y pegarlo en lugar :id en la URL</p>
+    </div>
+  
+    <div class="card">
+      <h3>ELIMINAR UN INMUEBLE</h3>
+      <p>DELETE: http://localhost:3000/inmuebles/:id</p>
+      <p>copiar un id de un inmueble del listado y pegarlo en lugar :id en la URL</p>
+    </div>
 
-  <p>Borrar un Inmueble: </p>
-
-  <ul id="message"></ul>
+  </div>
 
 </body>
-
-<script>
-  const boton = document.querySelector("#cargarUsuarios");
-  const ul = document.querySelector("#message");
-
-  boton.addEventListener("click", () => {
-    fetch("http://localhost:3000/users")
-      .then((res) => res.json())
-      .then((usuarios) => {
-        ul.innerHTML = ""; // limpiar lista previa
-        usuarios.forEach((usuario) => {
-          const li = document.createElement("li");
-          li.textContent = `ID: ${usuario.id}, Nombre: ${usuario.name}, Mail: ${usuario.email}`;
-          ul.appendChild(li);
-        });
-      });
-  });
-</script>
-
-<!-- <script>
-    const p = document.querySelector("p#message");
-    fetch("http://localhost:3000/inmuebles")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        p.innerHTML = JSON.stringify(data, null, 2); // el 2 es para darle formato
-
-      });
-</script> -->
 </html>
