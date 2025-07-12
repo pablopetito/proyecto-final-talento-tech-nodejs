@@ -1,4 +1,4 @@
-// services
+// services Inmuebles 
 
 import { getInmuebleById as getById } from '../models/inmueble.model.js';
 import { getAllInmuebles as getAll } from '../models/inmueble.model.js';
@@ -6,6 +6,7 @@ import { addInmueble as addInmuebleModel } from '../models/inmueble.model.js';
 import { updateInmueble as updateInmuebleModel } from '../models/inmueble.model.js';
 import { deleteInmueble as deleteInmuebleModel } from '../models/inmueble.model.js';
 
+// Todos los Inmuebles
 export const getAllInmuebles = async () => {
   try {
   
@@ -17,6 +18,7 @@ export const getAllInmuebles = async () => {
   }
 };
 
+// Busca Inmueble por ID
 export const getInmuebleById = async (id) => {
   return await getById(id);
 };
@@ -30,6 +32,7 @@ export const addInmueble = async (nuevoInmueble) => {
   }
 };
 
+// Actualiza un Inmueble
 export const updateInmueble = async (id, datosActualizados) => {
   try {
     return await updateInmuebleModel(id, datosActualizados);
@@ -39,6 +42,7 @@ export const updateInmueble = async (id, datosActualizados) => {
   }
 };
 
+// Elimina un Inmueble 
 export const deleteInmueble = async (id) => {
   try {
     return await deleteInmuebleModel(id);

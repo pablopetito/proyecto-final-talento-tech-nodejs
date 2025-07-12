@@ -24,15 +24,10 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
-// Validar carga
-console.log("CONFIG COMPLETA =>", firebaseConfig);
-
-
-// Initialize Firebase
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore
-
+// Inicializar Firestore
 const db = getFirestore(app); 
 
 export  { db };

@@ -1,5 +1,4 @@
-// controller
-
+// controller INMUEBLES
 import * as inmuebleService from '../services/inmueble.service.js';
 
 export const getAllInmuebles = async (req, res) => {

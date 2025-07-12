@@ -1,4 +1,4 @@
-//router
+//router Inmuebles 
 import { Router } from "express";
 import inmuebleController from '../controllers/inmueble.controller.js'
 import * as inmuebleService from '../services/inmueble.service.js';
@@ -21,7 +21,7 @@ router.post('/', authentication, soloAdmins, async (req, res) => {
   }
 });
 
-// Actualizar un inmueble
+// Ruta PUT Actualizar un inmueble
 router.put('/:id', authentication, soloAdmins, async (req, res) => {
   try {
     const id = req.params.id;
@@ -33,7 +33,7 @@ router.put('/:id', authentication, soloAdmins, async (req, res) => {
   }
 });
 
-// Eliminar un inmueble
+// Ruta DELETE Eliminar un inmueble
 router.delete('/:id', authentication, soloAdmins, async (req, res) => {
   try {
     const id = req.params.id;

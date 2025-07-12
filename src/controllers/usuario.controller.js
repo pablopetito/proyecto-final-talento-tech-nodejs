@@ -1,6 +1,8 @@
+// controller USUARIO 
 import * as usuarioService from '../services/usuario.service.js';
 import { generateToken } from '../utils/token-generator.js';
 
+// login Usuario 
 export const loginUsuario = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -17,6 +19,7 @@ export const loginUsuario = async (req, res) => {
   }
 };
 
+// listado Usuarios 
 export const listarUsuarios = async (req, res) => {
   try {
     const usuarios = await usuarioService.obtenerTodosLosUsuarios();

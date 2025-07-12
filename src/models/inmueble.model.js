@@ -1,10 +1,10 @@
-// model
+// models Inmueble 
 import { db } from '../config/db.js'
 import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const inmueblesCollection = collection(db, 'Inmuebles')
 
-// Método obtener inmueble por id
+// buscar inmueble por id
 export const getInmuebleById = async (id) => {
   const docRef = doc(inmueblesCollection, id);
   const docSnap = await getDoc(docRef);
@@ -16,7 +16,7 @@ export const getInmuebleById = async (id) => {
   }
 };
 
-// Método obtener todos los inmuebles
+// todos los inmuebles
 export const getAllInmuebles = async () => {
   const snapshot = await getDocs(inmueblesCollection);
   const inmuebles = snapshot.docs.map(doc => ({
@@ -26,7 +26,7 @@ export const getAllInmuebles = async () => {
   return inmuebles;
 };
 
-// Método agregar nuevo inmueble
+// agregar nuevo inmueble
 export const addInmueble = async (nuevoInmueble) => {
   try {
     const docRef = await addDoc(inmueblesCollection, nuevoInmueble);
@@ -37,7 +37,7 @@ export const addInmueble = async (nuevoInmueble) => {
   }
 };
 
-// Método actualizar inmueble
+// actualizar un inmueble
 export const updateInmueble = async (id, datosActualizados) => {
   try {
     const docRef = doc(db, 'Inmuebles', id);
@@ -49,7 +49,7 @@ export const updateInmueble = async (id, datosActualizados) => {
   }
 };
 
-// Método eliminar inmueble
+// eliminar un inmueble
 export const deleteInmueble = async (id) => {
   try {
     const docRef = doc(db, 'Inmuebles', id);

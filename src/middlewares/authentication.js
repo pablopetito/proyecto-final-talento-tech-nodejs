@@ -15,11 +15,12 @@ export const authentication = (req, res, next) => {
   jwt.verify(token, secret_key, (err, decoded) => {
     if (err) return res.status(403).json({ mensaje: 'Acceso denegado' });
 
-    req.usuario = decoded;  // esto te permite acceder al rol, email, etc.
+    req.usuario = decoded; 
     next();
   });
 };
 
+// Middleware para verificar rol de los usuarios
 export const soloAdmins = (req, res, next) => {
   if (req.usuario?.rol !== 'admin') {
     return res.status(403).json({ mensaje: 'Acceso permitido solo a administradores' });
