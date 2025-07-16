@@ -17,14 +17,6 @@ router.post('/', authentication, soloAdmins,  inmuebleController.addInmueble);
 router.put('/:id', authentication, soloAdmins, inmuebleController.updateInmueble);
 
 // Ruta DELETE Eliminar un inmueble
-router.delete('/:id', authentication, soloAdmins, async (req, res) => {
-  try {
-    const id = req.params.id;
-    const resultado = await inmuebleService.deleteInmueble(id);
-    res.json(resultado);
-  } catch (error) {
-    res.status(500).json({ mensaje: 'Error al eliminar inmueble', error });
-  }
-});
-
+router.delete('/:id', authentication, soloAdmins, inmuebleController.deleteInmueble);
+  
 export default router

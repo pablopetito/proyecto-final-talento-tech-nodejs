@@ -60,5 +60,20 @@ const updateInmueble = async (req, res) => {
   }
 };
 
+// Elimina un Inmueble 
+const deleteInmueble = async (req, res) => {
+  
+  try {
+    const id = req.params.id;
+    const resultado = await inmuebleService.deleteInmueble(id);
+    res.status(200).json({
+        payload: resultado
+    });
+  } catch (error) {
+    console.error("Error en el servicio al eliminar:", error);
+    throw error;
+  }
+};
 
-export default { getAllInmuebles, getInmuebleById, addInmueble, updateInmueble };
+
+export default { getAllInmuebles, getInmuebleById, addInmueble, updateInmueble, deleteInmueble };
