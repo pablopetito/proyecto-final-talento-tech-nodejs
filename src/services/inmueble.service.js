@@ -23,6 +23,7 @@ export const getInmuebleById = async (id) => {
   return await getById(id);
 };
 
+// Agregar un Inmueble
 export const addInmueble = async (nuevoInmueble) => {
   try {
     return await addInmuebleModel(nuevoInmueble);
@@ -35,6 +36,7 @@ export const addInmueble = async (nuevoInmueble) => {
 // Actualiza un Inmueble
 export const updateInmueble = async (id, datosActualizados) => {
   try {
+    
     return await updateInmuebleModel(id, datosActualizados);
   } catch (error) {
     console.error("Error en el servicio al actualizar:", error);

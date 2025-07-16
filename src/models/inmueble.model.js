@@ -27,10 +27,10 @@ export const getAllInmuebles = async () => {
 };
 
 // agregar nuevo inmueble
-export const addInmueble = async (nuevoInmueble) => {
+export const addInmueble = async (inmuebleData) => {
   try {
-    const docRef = await addDoc(inmueblesCollection, nuevoInmueble);
-    return { id: docRef.id, ...nuevoInmueble };
+    const docRef = await addDoc(inmueblesCollection, inmuebleData);
+    return { id: docRef.id, ...inmuebleData };
   } catch (error) {
     console.error("Error al agregar inmueble en el modelo:", error);
     throw error;
@@ -40,11 +40,12 @@ export const addInmueble = async (nuevoInmueble) => {
 // actualizar un inmueble
 export const updateInmueble = async (id, datosActualizados) => {
   try {
-    const docRef = doc(db, 'Inmuebles', id);
+    
+    const docRef = doc(db, 'Inmuebles', String(id));
     await updateDoc(docRef, datosActualizados);
     return { id, ...datosActualizados };
   } catch (error) {
-    console.error("Error al actualizar el inmueble:", error);
+    console.error("Model - Error al actualizar el inmueble:", error);
     throw error;
   }
 };

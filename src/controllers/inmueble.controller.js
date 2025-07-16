@@ -28,4 +28,37 @@ const getInmuebleById = async (req, res) => {
   }
 };
 
-export default { getAllInmuebles, getInmuebleById };
+const addInmueble = async (req, res) => {
+  try {
+    const nuevoInmueble=req.body;
+    
+    const inmuebleCreado =  await inmuebleService.addInmueble(nuevoInmueble);
+    res.status(200).json({ message: "Inmueble Nuevo", payload: inmuebleCreado });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "error interno del servidor", error: error.message });
+  }
+};
+
+const updateInmueble = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const datosActualizados = req.body;
+    
+    const resultado = await inmuebleService.updateInmueble(id, datosActualizados);
+
+    res.status(200).json({
+      mensaje: 'Inmueble actualizado correctamente',
+      payload: resultado
+    });
+  } catch (error) {
+    res.status(500).json({
+      mensaje: 'Error al actualizar inmueble (controller)',
+      error: error.message
+    });
+  }
+};
+
+
+export default { getAllInmuebles, getInmuebleById, addInmueble, updateInmueble };
